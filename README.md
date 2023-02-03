@@ -8,9 +8,9 @@ Append-Only Merkle tree with O(1) append gas cost.
 
 I implemented an append-only merkle tree data structure with
 
-- Appending new data with $O(1)$
-    - always 2-3 `SSTORE`s (1 non-zero slot, 1-2 zero slots)
-- Querying merkle root with $O(log{n})$ (n is the number of leaf nodes)
+- Appending new data with $O(1)$ writes.
+    - always 2-3 `SSTORE`s no matter how many data it has (1 non-zero slot, 1-2 zero slots)
+- Querying merkle root with $O(log{n})$
     - Less efficient than original merkle tree but it's reasonable complexity.
     - Even though it has $O(logn)$ complexity, you can reuse it with $O(1)$ if caching.
     - You don't need to save merkle root histories. You can calculate them anytime without saving them.
@@ -20,11 +20,11 @@ I implemented an append-only merkle tree data structure with
 I call it as CMT(Confirmed Merkle Tree) for convenience. I think it is useful for maintaining merkle trees 
 especially in EVM based smart contracts. 
 
-# Performance
+# Performances
 
-I implemented CMT by solidity for testing. I made a merkle tree with dummy data and test 
-its append and root query performance. I use keccak256 algorithm but, of course, using other hash
-would work well.
+I implemented CMT by solidity for testing. I made a merkle tree with dummy data and test
+its append and root query performance. It gets average gas costs by appending and querying 128 times. 
+I use keccak256 algorithm but, of course, using other hash would work well.
 
 Please do not use production level yet because it's not audited.
 
