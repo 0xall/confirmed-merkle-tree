@@ -26,8 +26,6 @@ I implemented CMT by solidity for testing. I made a merkle tree with dummy data 
 its append and root query performance. I use keccak256 algorithm but, of course, using other hash
 would work well.
 
-I opened source code : 
-
 Please do not use production level yet because it's not audited.
 
 ### Append performance (gas fee in EVM)
