@@ -84,4 +84,18 @@ describe("ConfirmedMerkleTree", () => {
 
     expect(await contract.merkleRoot()).to.equal(calculateMerkleRoot(...merkleData));
   });
+
+  it("should return merkle root history", async () => {
+    await contract.append(ethers.utils.hexZeroPad("0x1", 32));
+    await contract.append(ethers.utils.hexZeroPad("0x2", 32));
+    await contract.append(ethers.utils.hexZeroPad("0x3", 32));
+    await contract.append(ethers.utils.hexZeroPad("0x4", 32));
+    await contract.append(ethers.utils.hexZeroPad("0x5", 32));
+    await contract.append(ethers.utils.hexZeroPad("0x6", 32));
+    await contract.append(ethers.utils.hexZeroPad("0x7", 32));
+    await contract.append(ethers.utils.hexZeroPad("0x8", 32));
+    await contract.append(ethers.utils.hexZeroPad("0x9", 32));
+
+    expect(await contract.merkleRootHistory(3)).to.equal(calculateMerkleRoot("0x01", "0x02", "0x03"));
+  })
 });
